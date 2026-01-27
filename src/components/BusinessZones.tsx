@@ -121,28 +121,36 @@ const FlipCard = ({ zone }: { zone: typeof businessZones[0] }) => {
   const IconComponent = zone.icon;
   
   return (
-    <div className="group perspective-1000 h-64">
+    <div className="group perspective-1000 h-72">
       <div className="relative w-full h-full transition-transform duration-500 transform-style-3d group-hover:rotate-y-180">
         {/* Front Side */}
-        <div className="absolute inset-0 backface-hidden rounded-xl bg-card border border-border shadow-md flex flex-col items-center justify-center p-6 text-center">
-          <div className="w-16 h-16 rounded-full bg-accent flex items-center justify-center mb-4">
-            <IconComponent className="w-8 h-8 text-accent-foreground" />
+        <div className="absolute inset-0 backface-hidden rounded-xl overflow-hidden shadow-lg border border-border flex flex-col">
+          {/* Top 2/3 - Icon on light background */}
+          <div className="flex-[2] bg-gradient-to-br from-accent to-card flex items-center justify-center relative">
+            <div className="absolute inset-0 bg-primary/5" />
+            <div className="w-20 h-20 rounded-2xl bg-card/80 backdrop-blur-sm flex items-center justify-center shadow-md border border-border/50">
+              <IconComponent className="w-10 h-10 text-primary" />
+            </div>
           </div>
-          <h3 className="text-lg font-semibold text-card-foreground mb-2">
-            {zone.title}
-          </h3>
-          <span className="text-xs font-medium text-muted-foreground bg-muted px-3 py-1 rounded-full">
-            {zone.category}
-          </span>
+          
+          {/* Bottom 1/3 - Title on dark background */}
+          <div className="flex-1 bg-secondary px-4 py-3 flex flex-col justify-center">
+            <h3 className="text-sm font-semibold text-secondary-foreground leading-tight mb-1">
+              {zone.title}
+            </h3>
+            <span className="text-xs text-secondary-foreground/70">
+              {zone.category}
+            </span>
+          </div>
         </div>
         
         {/* Back Side */}
-        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-primary text-primary-foreground flex flex-col items-center justify-center p-6 text-center">
-          <p className="text-sm leading-relaxed mb-4">
+        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-primary text-primary-foreground flex flex-col p-5 shadow-lg">
+          <p className="text-sm leading-relaxed flex-1">
             {zone.description}
           </p>
-          <div className="flex items-center gap-2 mb-4">
-            <div className="w-2 h-2 rounded-full bg-primary-foreground/70" />
+          <div className="flex items-center gap-2 mb-3 mt-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary-foreground/70" />
             <span className="text-xs font-medium text-primary-foreground/90">
               {zone.goal}
             </span>
@@ -150,7 +158,7 @@ const FlipCard = ({ zone }: { zone: typeof businessZones[0] }) => {
           <Button 
             variant="secondary" 
             size="sm"
-            className="mt-auto"
+            className="w-full"
           >
             Попробовать
           </Button>
