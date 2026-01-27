@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { 
   Users, 
   GraduationCap, 
@@ -117,6 +117,49 @@ const businessZones = [
   }
 ];
 
+const FlipCard = ({ zone }: { zone: typeof businessZones[0] }) => {
+  const IconComponent = zone.icon;
+  
+  return (
+    <div className="group perspective-1000 h-64">
+      <div className="relative w-full h-full transition-transform duration-500 transform-style-3d group-hover:rotate-y-180">
+        {/* Front Side */}
+        <div className="absolute inset-0 backface-hidden rounded-xl bg-card border border-border shadow-md flex flex-col items-center justify-center p-6 text-center">
+          <div className="w-16 h-16 rounded-full bg-accent flex items-center justify-center mb-4">
+            <IconComponent className="w-8 h-8 text-accent-foreground" />
+          </div>
+          <h3 className="text-lg font-semibold text-card-foreground mb-2">
+            {zone.title}
+          </h3>
+          <span className="text-xs font-medium text-muted-foreground bg-muted px-3 py-1 rounded-full">
+            {zone.category}
+          </span>
+        </div>
+        
+        {/* Back Side */}
+        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-primary text-primary-foreground flex flex-col items-center justify-center p-6 text-center">
+          <p className="text-sm leading-relaxed mb-4">
+            {zone.description}
+          </p>
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-2 h-2 rounded-full bg-primary-foreground/70" />
+            <span className="text-xs font-medium text-primary-foreground/90">
+              {zone.goal}
+            </span>
+          </div>
+          <Button 
+            variant="secondary" 
+            size="sm"
+            className="mt-auto"
+          >
+            Попробовать
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const BusinessZones = () => {
   return (
     <section className="py-24 bg-muted/30">
@@ -131,39 +174,9 @@ const BusinessZones = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {businessZones.map((zone, index) => (
-            <Card 
-              key={index} 
-              className="group bg-card border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col"
-            >
-              <CardHeader className="pb-3">
-                <div className="flex items-start justify-between mb-2">
-                  <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
-                    <zone.icon className="w-6 h-6 text-accent-foreground group-hover:text-primary transition-colors duration-300" />
-                  </div>
-                  <span className="text-xs font-medium text-muted-foreground bg-muted px-2 py-1 rounded-md">
-                    {zone.category}
-                  </span>
-                </div>
-                <CardTitle className="text-lg text-card-foreground leading-tight">
-                  {zone.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="flex-1 flex flex-col">
-                <CardDescription className="text-muted-foreground text-sm leading-relaxed flex-1">
-                  {zone.description}
-                </CardDescription>
-                <div className="mt-4 pt-3 border-t border-border">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                    <span className="text-xs font-medium text-primary">
-                      {zone.goal}
-                    </span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <FlipCard key={index} zone={zone} />
           ))}
         </div>
       </div>
