@@ -1,115 +1,115 @@
 import { Button } from "@/components/ui/button";
-import { 
-  Users, 
-  GraduationCap, 
-  Factory, 
-  Shield, 
-  Server, 
-  Calculator, 
-  ShoppingCart, 
-  UserCog, 
-  Scale, 
-  Award, 
-  Monitor, 
-  Heart, 
-  Handshake, 
-  Star
-} from "lucide-react";
+
+// Import zone images
+import recruitmentImg from "@/assets/zones/recruitment.jpg";
+import trainingImg from "@/assets/zones/training.jpg";
+import productionImg from "@/assets/zones/production.jpg";
+import safetyImg from "@/assets/zones/safety.jpg";
+import itSecurityImg from "@/assets/zones/it-security.jpg";
+import financeImg from "@/assets/zones/finance.jpg";
+import salesImg from "@/assets/zones/sales.jpg";
+import managementImg from "@/assets/zones/management.jpg";
+import legalImg from "@/assets/zones/legal.jpg";
+import qualityImg from "@/assets/zones/quality.jpg";
+import erpSystemsImg from "@/assets/zones/erp-systems.jpg";
+import cultureImg from "@/assets/zones/culture.jpg";
+import contractorsImg from "@/assets/zones/contractors.jpg";
+import expertsImg from "@/assets/zones/experts.jpg";
 
 const businessZones = [
   {
-    icon: Users,
+    image: recruitmentImg,
     title: "Подбор и адаптация",
     category: "HR / Recruitment",
     description: "Проверка знаний кандидатов, входное тестирование, аттестация после испытательного срока",
     goal: "Снижение риска ошибочного найма"
   },
   {
-    icon: GraduationCap,
+    image: trainingImg,
     title: "Обучение и развитие",
     category: "L&D / Training",
     description: "Контроль усвоения материалов, подтверждение квалификации, измерение ROI обучения",
     goal: "Измеримая эффективность обучения"
   },
   {
-    icon: Factory,
+    image: productionImg,
     title: "Производство",
     category: "Operations",
     description: "Знание технологических карт, SOP, работа с оборудованием и допуски к операциям",
     goal: "Снижение брака и аварий"
   },
   {
-    icon: Shield,
+    image: safetyImg,
     title: "Охрана труда",
     category: "HSE / BHP",
     description: "Инструктажи, контроль техники безопасности, документальное подтверждение проверок",
     goal: "Снижение травматизма"
   },
   {
-    icon: Server,
+    image: itSecurityImg,
     title: "ИТ и информационная безопасность",
     category: "IT / InfoSec",
     description: "Политики ИБ, защита от phishing, работа с доступами и IT-процедурами",
     goal: "Снижение человеческого фактора"
   },
   {
-    icon: Calculator,
+    image: financeImg,
     title: "Финансы и комплаенс",
     category: "Finance / Compliance",
     description: "Финансовые процедуры, регуляторные требования, AML и антикоррупция",
     goal: "Снижение регуляторных рисков"
   },
   {
-    icon: ShoppingCart,
+    image: salesImg,
     title: "Продажи и сервис",
     category: "Sales / CS",
     description: "Знание продуктов, скрипты продаж, условия договоров и стандарты общения",
     goal: "Повышение конверсии"
   },
   {
-    icon: UserCog,
+    image: managementImg,
     title: "Менеджмент",
     category: "Management",
     description: "Внутренние политики, управление конфликтами, KPI и лидерские компетенции",
     goal: "Выравнивание управленческого уровня"
   },
   {
-    icon: Scale,
+    image: legalImg,
     title: "Юридическая функция",
     category: "Legal",
     description: "Типовые договоры, процедуры согласования, зоны риска и ответственности",
     goal: "Снижение правовых последствий"
   },
   {
-    icon: Award,
+    image: qualityImg,
     title: "Качество и стандарты",
     category: "QA / ISO / GMP",
     description: "Стандарты качества, процедуры аудита, соответствие сертификациям",
     goal: "Успешное прохождение аудитов"
   },
   {
-    icon: Monitor,
+    image: erpSystemsImg,
     title: "Корпоративные ИТ-системы",
     category: "ERP / CRM",
     description: "Работа с ERP, CRM, WMS, снижение ошибок при использовании систем",
     goal: "Снижение потерь от ошибок"
   },
   {
-    icon: Heart,
+    image: cultureImg,
     title: "Корпоративная культура",
     category: "Culture & Ethics",
     description: "Кодекс поведения, этика, политики diversity и whistleblowing",
     goal: "Снижение репутационных рисков"
   },
   {
-    icon: Handshake,
+    image: contractorsImg,
     title: "Подрядчики и партнёры",
     category: "Outsourcing",
     description: "Стандарты компании для внешних исполнителей, допуск к системам",
     goal: "Контроль рисков вне штата"
   },
   {
-    icon: Star,
+    image: expertsImg,
     title: "Ключевые эксперты",
     category: "Critical Roles",
     description: "Подтверждение уникальных знаний, актуальность экспертизы, succession planning",
@@ -118,19 +118,19 @@ const businessZones = [
 ];
 
 const FlipCard = ({ zone }: { zone: typeof businessZones[0] }) => {
-  const IconComponent = zone.icon;
-  
   return (
     <div className="group perspective-1000 h-72">
       <div className="relative w-full h-full transition-transform duration-500 transform-style-3d group-hover:rotate-y-180">
         {/* Front Side */}
         <div className="absolute inset-0 backface-hidden rounded-xl overflow-hidden shadow-lg border border-border flex flex-col">
-          {/* Top 2/3 - Icon on light background */}
-          <div className="flex-[2] bg-gradient-to-br from-accent to-card flex items-center justify-center relative">
-            <div className="absolute inset-0 bg-primary/5" />
-            <div className="w-20 h-20 rounded-2xl bg-card/80 backdrop-blur-sm flex items-center justify-center shadow-md border border-border/50">
-              <IconComponent className="w-10 h-10 text-primary" />
-            </div>
+          {/* Top 2/3 - Thematic image */}
+          <div className="flex-[2] relative overflow-hidden">
+            <img 
+              src={zone.image} 
+              alt={zone.title}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
           </div>
           
           {/* Bottom 1/3 - Title on dark background */}
