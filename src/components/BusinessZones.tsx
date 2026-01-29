@@ -132,10 +132,10 @@ const FlipCard = ({ zone, index, activatedCards, onActivate }: {
     setIsHovered(true);
     if (!isActivated) {
       onActivate(index);
-      // Delay flip until color transition completes (0.4s)
+      // Delay flip: 0.4s color transition + 0.6s pause = 1s total
       setTimeout(() => {
         setIsFlipped(true);
-      }, 400);
+      }, 1000);
     } else {
       setIsFlipped(true);
     }
