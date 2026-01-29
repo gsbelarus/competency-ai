@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 // Import zone images
@@ -117,18 +118,56 @@ const businessZones = [
   }
 ];
 
-const FlipCard = ({ zone }: { zone: typeof businessZones[0] }) => {
+const FlipCard = ({ zone, index, activatedCards, onActivate }: { 
+  zone: typeof businessZones[0]; 
+  index: number;
+  activatedCards: Set<number>;
+  onActivate: (index: number) => void;
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const isActivated = activatedCards.has(index);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (!isActivated) {
+      onActivate(index);
+      // Delay flip until color transition completes (0.4s)
+      setTimeout(() => {
+        setIsFlipped(true);
+      }, 400);
+    } else {
+      setIsFlipped(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setIsFlipped(false);
+  };
+
   return (
-    <div className="group perspective-1000 h-72">
-      <div className="relative w-full h-full transition-transform duration-500 transform-style-3d group-hover:rotate-y-180">
+    <div 
+      className="perspective-1000 h-72"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div 
+        className={`relative w-full h-full transition-transform duration-500 transform-style-3d ${isFlipped ? 'rotate-y-180' : ''}`}
+      >
         {/* Front Side */}
         <div className="absolute inset-0 backface-hidden rounded-xl overflow-hidden shadow-lg border border-border flex flex-col">
-          {/* Top 2/3 - Thematic image */}
+          {/* Top 2/3 - Thematic image with lavender monochrome effect */}
           <div className="flex-[2] relative overflow-hidden">
             <img 
               src={zone.image} 
               alt={zone.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-all duration-[400ms] ease-out"
+              style={{
+                filter: isActivated 
+                  ? 'none' 
+                  : 'grayscale(100%) sepia(30%) saturate(200%) hue-rotate(220deg) brightness(1.1)',
+              }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
           </div>
@@ -172,6 +211,12 @@ const FlipCard = ({ zone }: { zone: typeof businessZones[0] }) => {
 };
 
 const BusinessZones = () => {
+  const [activatedCards, setActivatedCards] = useState<Set<number>>(new Set());
+
+  const handleActivate = (index: number) => {
+    setActivatedCards(prev => new Set(prev).add(index));
+  };
+
   return (
     <section className="py-24 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -187,7 +232,13 @@ const BusinessZones = () => {
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {businessZones.map((zone, index) => (
-            <FlipCard key={index} zone={zone} />
+            <FlipCard 
+              key={index} 
+              zone={zone} 
+              index={index}
+              activatedCards={activatedCards}
+              onActivate={handleActivate}
+            />
           ))}
         </div>
       </div>
