@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 
 import knowledgeMatrixImg from "@/assets/features/knowledge-matrix.jpg";
@@ -45,18 +45,29 @@ const FeatureFlipCard = ({ feature, index, activatedCards, onActivate }: {
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const isActivated = activatedCards.has(index);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleMouseEnter = () => {
-    if (!isActivated) {
-      onActivate(index);
+  const handleMouseEnter = useCallback(() => {
+    if (!isActivated) onActivate(index);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
     }
-    setIsFlipped(prev => !prev);
-  };
+    setIsFlipped(true);
+  }, [isActivated, index, onActivate]);
+
+  const handleMouseLeave = useCallback(() => {
+    timerRef.current = setTimeout(() => {
+      setIsFlipped(false);
+      timerRef.current = null;
+    }, 8000);
+  }, []);
 
   return (
     <div
       className="perspective-1000 h-72"
       onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <div
         className={`relative w-full h-full transition-transform duration-500 transform-style-3d ${isFlipped ? 'rotate-y-180' : ''}`}
