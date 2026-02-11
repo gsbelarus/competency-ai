@@ -19,14 +19,11 @@ const Header = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <a href="#features" className="font-medium text-muted-foreground hover:text-foreground transition-colors text-lg">
-              Возможности
-            </a>
             <a href="#zones" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               Применение
             </a>
-            <a href="#pricing" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-              Тарифы
+            <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              Возможности
             </a>
             <a href="#contact" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               Контакты
@@ -56,14 +53,11 @@ const Header = () => {
         {isMenuOpen &&
         <nav className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
-              <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                Возможности
-              </a>
               <a href="#zones" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 Применение
               </a>
-              <a href="#pricing" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                Тарифы
+              <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                Возможности
               </a>
               <a href="#contact" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 Контакты
