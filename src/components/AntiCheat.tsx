@@ -1,34 +1,132 @@
-import spectrogramImg from "@/assets/anti-cheat/spectrogram.jpg";
-import faceMeshImg from "@/assets/anti-cheat/face-mesh.jpg";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+
 import textAnalysisImg from "@/assets/anti-cheat/text-analysis.jpg";
+import audioAnalysisImg from "@/assets/anti-cheat/audio-analysis.jpg";
+import videoAnalysisImg from "@/assets/anti-cheat/video-analysis.jpg";
+import plagiarismImg from "@/assets/anti-cheat/plagiarism.jpg";
+
+const cards = [
+  {
+    image: textAnalysisImg,
+    title: "Анализ текстов и транскрипций",
+    category: "Text Analysis",
+    description: "NLP-модели анализируют транскрипции экзаменов и интервью, выявляя паттерны заученных или продиктованных ответов. Сравнение стилистики и лексики отличает подлинные знания от шпаргалок.",
+    goal: "Выявление подсказок в речи"
+  },
+  {
+    image: audioAnalysisImg,
+    title: "Анализ аудиозаписей",
+    category: "Audio Analysis",
+    description: "Спектральный анализ аудиопотока выявляет посторонние голоса, подсказки через наушники и фоновые звуки. Модели обучены на тысячах записей и распознают даже замаскированные попытки обмана.",
+    goal: "Контроль звуковой среды"
+  },
+  {
+    image: videoAnalysisImg,
+    title: "Анализ видеозаписей",
+    category: "Video Analysis",
+    description: "Компьютерное зрение отслеживает направление взгляда, мимику и движения кандидата. Контрольные точки на лице фиксируют чтение с экрана и присутствие посторонних лиц в кадре.",
+    goal: "Контроль поведения в кадре"
+  },
+  {
+    image: plagiarismImg,
+    title: "Поиск плагиата",
+    category: "Plagiarism Detection",
+    description: "Сравнение ответов кандидатов между собой и с базой открытых источников выявляет заимствования и совпадения. Алгоритм учитывает перефразирование и частичное копирование текста.",
+    goal: "Проверка оригинальности"
+  }
+];
+
+const AntiCheatFlipCard = ({ card, index, activatedCards, onActivate }: {
+  card: typeof cards[0];
+  index: number;
+  activatedCards: Set<number>;
+  onActivate: (index: number) => void;
+}) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const isActivated = activatedCards.has(index);
+
+  const handleMouseEnter = () => {
+    if (!isActivated) {
+      onActivate(index);
+      setTimeout(() => {
+        setIsFlipped(true);
+      }, 1000);
+    } else {
+      setIsFlipped(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsFlipped(false);
+  };
+
+  return (
+    <div
+      className="perspective-1000 h-72"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div
+        className={`relative w-full h-full transition-transform duration-500 transform-style-3d ${isFlipped ? 'rotate-y-180' : ''}`}
+      >
+        {/* Front Side */}
+        <div className="absolute inset-0 backface-hidden rounded-xl overflow-hidden shadow-lg border border-border flex flex-col">
+          <div className="flex-[2] relative overflow-hidden">
+            <img
+              src={card.image}
+              alt={card.title}
+              className="w-full h-full object-cover transition-all duration-[400ms] ease-out"
+              style={{
+                filter: isActivated
+                  ? 'none'
+                  : 'grayscale(100%) sepia(30%) saturate(200%) hue-rotate(220deg) brightness(1.1)',
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
+          </div>
+
+          <div className="flex-1 bg-secondary px-4 py-3 flex flex-col justify-center">
+            <h3 className="text-sm font-semibold text-secondary-foreground leading-tight mb-1">
+              {card.title}
+            </h3>
+            <span className="text-xs text-secondary-foreground/70">
+              {card.category}
+            </span>
+          </div>
+        </div>
+
+        {/* Back Side */}
+        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card text-card-foreground flex flex-col p-5 shadow-lg border border-border">
+          <p className="text-sm leading-relaxed flex-1 text-muted-foreground">
+            {card.description}
+          </p>
+          <div className="flex items-center gap-2 mb-3 mt-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <span className="text-xs font-medium text-primary">
+              {card.goal}
+            </span>
+          </div>
+          <Button variant="default" size="sm" className="w-full">
+            Попробовать
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const AntiCheat = () => {
-  return (
-    <section className="py-24 bg-secondary/5 relative overflow-hidden">
-      {/* Background decorative images blended into section */}
-      <div className="absolute inset-0 pointer-events-none">
-        <img
-          src={spectrogramImg}
-          alt=""
-          aria-hidden="true"
-          className="absolute -left-16 top-8 w-[420px] opacity-[0.12] mix-blend-multiply"
-        />
-        <img
-          src={faceMeshImg}
-          alt=""
-          aria-hidden="true"
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-[340px] opacity-[0.10] mix-blend-multiply"
-        />
-        <img
-          src={textAnalysisImg}
-          alt=""
-          aria-hidden="true"
-          className="absolute left-1/4 bottom-4 w-[400px] opacity-[0.10] mix-blend-multiply"
-        />
-      </div>
+  const [activatedCards, setActivatedCards] = useState<Set<number>>(new Set());
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12">
+  const handleActivate = (index: number) => {
+    setActivatedCards(prev => new Set(prev).add(index));
+  };
+
+  return (
+    <section className="py-24 bg-background">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Объективная оценка и контроль
           </h2>
@@ -37,51 +135,16 @@ const AntiCheat = () => {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto space-y-10">
-          {/* Text analysis */}
-          <div className="flex items-start gap-6">
-            <div className="shrink-0 w-20 h-20 rounded-lg overflow-hidden border border-border/50 bg-card/60 backdrop-blur-sm flex items-center justify-center">
-              <img src={textAnalysisImg} alt="Анализ текста" className="w-full h-full object-cover opacity-60 grayscale" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-1">Анализ текстов и транскрипций</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Собственные NLP-модели анализируют транскрипции экзаменов и интервью, выявляя паттерны, характерные для заученных или продиктованных ответов. Алгоритмы сравнивают стилистику, лексическое разнообразие и структуру речи, чтобы отличить подлинные знания от подготовленных шпаргалок.
-              </p>
-            </div>
-          </div>
-
-          {/* Audio analysis */}
-          <div className="flex items-start gap-6">
-            <div className="shrink-0 w-20 h-20 rounded-lg overflow-hidden border border-border/50 bg-card/60 backdrop-blur-sm flex items-center justify-center">
-              <img src={spectrogramImg} alt="Спектрограмма" className="w-full h-full object-cover opacity-60 grayscale" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-1">Анализ аудиозаписей</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Спектральный анализ аудиопотока выявляет посторонние голоса, подсказки через наушники и фоновые звуки, указывающие на использование запрещённых средств. Модели обучены на тысячах записей и распознают даже тщательно замаскированные попытки обмана.
-              </p>
-            </div>
-          </div>
-
-          {/* Video analysis */}
-          <div className="flex items-start gap-6">
-            <div className="shrink-0 w-20 h-20 rounded-lg overflow-hidden border border-border/50 bg-card/60 backdrop-blur-sm flex items-center justify-center">
-              <img src={faceMeshImg} alt="Биометрия лица" className="w-full h-full object-cover opacity-60 grayscale" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-1">Анализ видеозаписей</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Компьютерное зрение отслеживает направление взгляда, мимику и движения кандидата в реальном времени. Контрольные точки на лице фиксируют отвлечения, чтение с экрана или присутствие посторонних лиц в кадре — всё это позволяет объективно оценить честность прохождения оценки.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="text-center mt-12">
-          <p className="text-sm text-muted-foreground/70 italic">
-            Все модели защищены патентами и разработаны на основе собственных исследований
-          </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {cards.map((card, index) => (
+            <AntiCheatFlipCard
+              key={index}
+              card={card}
+              index={index}
+              activatedCards={activatedCards}
+              onActivate={handleActivate}
+            />
+          ))}
         </div>
       </div>
     </section>
