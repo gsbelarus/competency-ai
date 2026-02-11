@@ -19,13 +19,13 @@ const Header = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <a href="#zones" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <a href="#zones" className="text-base font-semibold text-muted-foreground hover:text-foreground transition-colors">
               Применение
             </a>
-            <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <a href="#features" className="text-base font-semibold text-muted-foreground hover:text-foreground transition-colors">
               Возможности
             </a>
-            <a href="#contact" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <a href="#contact" className="text-base font-semibold text-muted-foreground hover:text-foreground transition-colors">
               Контакты
             </a>
           </nav>
@@ -53,13 +53,13 @@ const Header = () => {
         {isMenuOpen &&
         <nav className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
-              <a href="#zones" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              <a href="#zones" className="text-base font-semibold text-muted-foreground hover:text-foreground transition-colors">
                 Применение
               </a>
-              <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              <a href="#features" className="text-base font-semibold text-muted-foreground hover:text-foreground transition-colors">
                 Возможности
               </a>
-              <a href="#contact" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              <a href="#contact" className="text-base font-semibold text-muted-foreground hover:text-foreground transition-colors">
                 Контакты
               </a>
               <div className="flex flex-col gap-2 pt-4 border-t border-border">
