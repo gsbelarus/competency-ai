@@ -49,7 +49,7 @@ const Hero = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
             <div className="flex flex-col items-center p-6 rounded-xl bg-card/10 backdrop-blur-sm border border-primary-foreground/10">
               <Brain className="w-8 h-8 text-primary mb-3" />
-              <div className="text-3xl font-bold text-primary-foreground">14+</div>
+              <div className="text-3xl font-bold text-primary-foreground">16+</div>
               <div className="text-sm text-primary-foreground/70">Зон применения</div>
             </div>
             <div className="flex flex-col items-center p-6 rounded-xl bg-card/10 backdrop-blur-sm border border-primary-foreground/10">
