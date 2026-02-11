@@ -201,7 +201,7 @@ const FlipCard = ({ zone, index, activatedCards, onActivate }: {
         
         {/* Back Side */}
         <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card text-card-foreground flex flex-col p-5 shadow-lg border border-border">
-          <p className="text-xs leading-relaxed flex-1 text-muted-foreground">
+          <p className="text-sm leading-relaxed flex-1 text-muted-foreground">
             {zone.description}
           </p>
           <div className="flex items-center gap-2 mb-3 mt-2">
