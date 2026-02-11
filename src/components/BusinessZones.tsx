@@ -140,33 +140,20 @@ const FlipCard = ({ zone, index, activatedCards, onActivate }: {
   activatedCards: Set<number>;
   onActivate: (index: number) => void;
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
   const isActivated = activatedCards.has(index);
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
     if (!isActivated) {
       onActivate(index);
-      // Delay flip: 0.4s color transition + 0.6s pause = 1s total
-      setTimeout(() => {
-        setIsFlipped(true);
-      }, 1000);
-    } else {
-      setIsFlipped(true);
     }
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    setIsFlipped(false);
+    setIsFlipped(prev => !prev);
   };
 
   return (
     <div 
       className="perspective-1000 h-72"
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       <div 
         className={`relative w-full h-full transition-transform duration-500 transform-style-3d ${isFlipped ? 'rotate-y-180' : ''}`}

@@ -49,23 +49,14 @@ const FeatureFlipCard = ({ feature, index, activatedCards, onActivate }: {
   const handleMouseEnter = () => {
     if (!isActivated) {
       onActivate(index);
-      setTimeout(() => {
-        setIsFlipped(true);
-      }, 1000);
-    } else {
-      setIsFlipped(true);
     }
-  };
-
-  const handleMouseLeave = () => {
-    setIsFlipped(false);
+    setIsFlipped(prev => !prev);
   };
 
   return (
     <div
       className="perspective-1000 h-72"
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       <div
         className={`relative w-full h-full transition-transform duration-500 transform-style-3d ${isFlipped ? 'rotate-y-180' : ''}`}
