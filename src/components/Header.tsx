@@ -14,7 +14,7 @@ const Header = () => {
             <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
               <Brain className="w-6 h-6 text-primary-foreground" />
             </div>
-            <span className="text-xl font-bold text-primary-foreground">CompetenceAI</span>
+            <span className="text-2xl font-extrabold text-primary-foreground">CompetenceAI</span>
           </div>
           
           {/* Desktop Navigation */}
@@ -32,7 +32,7 @@ const Header = () => {
           
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" className="text-primary-foreground/70 hover:text-primary-foreground">
               Войти
             </Button>
             <Button variant="default" size="sm">
@@ -63,7 +63,7 @@ const Header = () => {
                 Контакты
               </a>
               <div className="flex flex-col gap-2 pt-4 border-t border-primary-foreground/20">
-                <Button variant="ghost" size="sm" className="justify-start">
+                <Button variant="ghost" size="sm" className="justify-start text-primary-foreground/70 hover:text-primary-foreground">
                   Войти
                 </Button>
                 <Button variant="default" size="sm">
