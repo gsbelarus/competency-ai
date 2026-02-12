@@ -105,23 +105,25 @@ const FlipCard = ({ data, index, activatedCards, onActivate }: FlipCardProps) =>
 
         {/* Back Side */}
         <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card text-card-foreground flex flex-col p-5 shadow-lg border border-border overflow-hidden">
-          <p className="text-sm leading-relaxed flex-1 text-muted-foreground">
+          <p className="text-sm leading-relaxed text-muted-foreground overflow-hidden text-ellipsis" style={{ display: '-webkit-box', WebkitLineClamp: 7, WebkitBoxOrient: 'vertical' }}>
             {data.description}
           </p>
-          <div className="flex items-center gap-2 mb-3 mt-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span className="text-xs font-medium text-primary">
-              {data.goal}
-            </span>
+          <div className="mt-auto pt-2">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+              <span className="text-xs font-medium text-primary">
+                {data.goal}
+              </span>
+            </div>
+            <Button
+              variant="default"
+              size="sm"
+              className="w-full"
+              onClick={openPanel}
+            >
+              Попробовать
+            </Button>
           </div>
-          <Button
-            variant="default"
-            size="sm"
-            className="w-full"
-            onClick={openPanel}
-          >
-            Попробовать
-          </Button>
 
           {/* Sliding Panel */}
           <div
