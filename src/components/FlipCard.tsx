@@ -125,8 +125,13 @@ const FlipCard = ({ data, index, activatedCards, onActivate }: FlipCardProps) =>
 
           {/* Sliding Panel */}
           <div
-            className={`absolute inset-0 rounded-xl bg-card border border-border shadow-lg flex flex-col items-center justify-center gap-3 p-5 transition-transform duration-300 ease-out ${isPanelOpen ? 'translate-y-0' : 'translate-y-full'}`}
+            className={`absolute inset-0 rounded-xl bg-card border border-border shadow-lg flex flex-col items-center justify-center gap-3 p-5 transition-transform duration-300 ease-out overflow-hidden ${isPanelOpen ? 'translate-y-0' : 'translate-y-full'}`}
           >
+            <img
+              src={data.image}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover opacity-25 grayscale-[50%] pointer-events-none"
+            />
             <button
               onClick={closePanel}
               className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors"
