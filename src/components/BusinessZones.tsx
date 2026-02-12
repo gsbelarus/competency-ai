@@ -1,7 +1,6 @@
-import { useState, useRef, useCallback } from "react";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import FlipCard from "@/components/FlipCard";
 
-// Import zone images
 import recruitmentImg from "@/assets/zones/recruitment.jpg";
 import trainingImg from "@/assets/zones/training.jpg";
 import productionImg from "@/assets/zones/production.jpg";
@@ -134,108 +133,6 @@ const businessZones = [
   }
 ];
 
-const FlipCard = ({ zone, index, activatedCards, onActivate }: { 
-  zone: typeof businessZones[0]; 
-  index: number;
-  activatedCards: Set<number>;
-  onActivate: (index: number) => void;
-}) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const isActivated = activatedCards.has(index);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const clearTimer = useCallback(() => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-  }, []);
-
-  const handleMouseEnter = useCallback(() => {
-    if (!isActivated) onActivate(index);
-    clearTimer();
-    setIsFlipped(true);
-  }, [isActivated, index, onActivate, clearTimer]);
-
-  const handleMouseLeave = useCallback(() => {
-    setIsFlipped(prev => {
-      if (prev) {
-        timerRef.current = setTimeout(() => {
-          setIsFlipped(false);
-          timerRef.current = null;
-        }, 8000);
-      }
-      return prev;
-    });
-  }, []);
-
-  const handleClick = useCallback(() => {
-    clearTimer();
-    setIsFlipped(prev => !prev);
-  }, [clearTimer]);
-
-  return (
-    <div 
-      className="perspective-1000 h-72"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
-    >
-      <div 
-        className={`relative w-full h-full transition-transform duration-500 transform-style-3d ${isFlipped ? 'rotate-y-180' : ''}`}
-      >
-        {/* Front Side */}
-        <div className="absolute inset-0 backface-hidden rounded-xl overflow-hidden shadow-lg border border-border flex flex-col">
-          {/* Top 2/3 - Thematic image with lavender monochrome effect */}
-          <div className="flex-[2] relative overflow-hidden">
-            <img 
-              src={zone.image} 
-              alt={zone.title}
-              className="w-full h-full object-cover transition-all duration-[400ms] ease-out"
-              style={{
-                filter: isActivated 
-                  ? 'none' 
-                  : 'grayscale(100%) sepia(30%) saturate(200%) hue-rotate(220deg) brightness(1.1)',
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
-          </div>
-          
-          {/* Bottom 1/3 - Title on dark background */}
-          <div className="flex-1 bg-secondary px-4 py-3 flex flex-col justify-center">
-            <h3 className="text-sm font-semibold text-secondary-foreground leading-tight mb-1">
-              {zone.title}
-            </h3>
-            <span className="text-xs text-secondary-foreground/70">
-              {zone.category}
-            </span>
-          </div>
-        </div>
-        
-        {/* Back Side */}
-        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card text-card-foreground flex flex-col p-5 shadow-lg border border-border">
-          <p className="text-sm leading-relaxed flex-1 text-muted-foreground">
-            {zone.description}
-          </p>
-          <div className="flex items-center gap-2 mb-3 mt-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span className="text-xs font-medium text-primary">
-              {zone.goal}
-            </span>
-          </div>
-          <Button 
-            variant="default" 
-            size="sm"
-            className="w-full"
-          >
-            Попробовать
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const BusinessZones = () => {
   const [activatedCards, setActivatedCards] = useState<Set<number>>(new Set());
 
@@ -260,7 +157,7 @@ const BusinessZones = () => {
           {businessZones.map((zone, index) => (
             <FlipCard 
               key={index} 
-              zone={zone} 
+              data={zone} 
               index={index}
               activatedCards={activatedCards}
               onActivate={handleActivate}
