@@ -194,24 +194,24 @@ All colors MUST be HSL.
     background: linear-gradient(
       90deg,
       hsl(var(--primary)) 0%,
-      hsl(var(--primary)) 35%,
+      hsl(var(--primary)) 40%,
       hsl(var(--primary) / 0.4) 50%,
-      hsl(var(--primary)) 65%,
+      hsl(var(--primary)) 60%,
       hsl(var(--primary)) 100%
     );
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    background-size: 300% 100%;
+    background-size: 400% 100%;
     animation: shimmer 3s ease-in-out forwards;
   }
 
 @keyframes shimmer {
   0% {
-    background-position: 100% 0;
+    background-position: 150% 0;
   }
   100% {
-    background-position: -100% 0;
+    background-position: -50% 0;
   }
 }
 
