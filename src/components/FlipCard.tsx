@@ -134,18 +134,18 @@ const FlipCard = ({ data, index, activatedCards, onActivate }: FlipCardProps) =>
             />
             <button
               onClick={closePanel}
-              className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors"
+              className="absolute top-3 right-3 z-10 text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Закрыть"
             >
               <X className="w-4 h-4" />
             </button>
-            <Button variant="default" size="sm" className="w-full" onClick={(e) => e.stopPropagation()}>
+            <Button variant="default" size="sm" className="relative z-10 w-full" onClick={(e) => e.stopPropagation()}>
               Пройти Селф-ассессмент
             </Button>
-            <Button variant="default" size="sm" className="w-full" onClick={(e) => e.stopPropagation()}>
+            <Button variant="default" size="sm" className="relative z-10 w-full" onClick={(e) => e.stopPropagation()}>
               Провести Интервью
             </Button>
-            <Button variant="default" size="sm" className="w-full" onClick={(e) => e.stopPropagation()}>
+            <Button variant="default" size="sm" className="relative z-10 w-full" onClick={(e) => e.stopPropagation()}>
               Загрузить файл для анализа
             </Button>
           </div>
