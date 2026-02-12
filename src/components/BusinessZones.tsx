@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import FlipCard from "@/components/FlipCard";
 
 import recruitmentImg from "@/assets/zones/recruitment.jpg";
@@ -135,22 +135,10 @@ const businessZones = [
 
 const BusinessZones = () => {
   const [activatedCards, setActivatedCards] = useState<Set<number>>(new Set());
-  const [cardHeights, setCardHeights] = useState<Record<number, number>>({});
 
   const handleActivate = (index: number) => {
     setActivatedCards(prev => new Set(prev).add(index));
   };
-
-  const handleMeasure = useCallback((index: number, height: number) => {
-    setCardHeights(prev => {
-      if (prev[index] === height) return prev;
-      return { ...prev, [index]: height };
-    });
-  }, []);
-
-  const maxHeight = Object.values(cardHeights).length > 0
-    ? Math.max(...Object.values(cardHeights))
-    : undefined;
 
   return (
     <section className="py-24 bg-muted/30">
@@ -173,8 +161,6 @@ const BusinessZones = () => {
               index={index}
               activatedCards={activatedCards}
               onActivate={handleActivate}
-              minHeight={maxHeight}
-              onMeasure={handleMeasure}
             />
           ))}
         </div>

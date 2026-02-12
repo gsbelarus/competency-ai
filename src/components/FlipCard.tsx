@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 
@@ -15,23 +15,13 @@ interface FlipCardProps {
   index: number;
   activatedCards: Set<number>;
   onActivate: (index: number) => void;
-  minHeight?: number;
-  onMeasure?: (index: number, height: number) => void;
 }
 
-const FlipCard = ({ data, index, activatedCards, onActivate, minHeight, onMeasure }: FlipCardProps) => {
+const FlipCard = ({ data, index, activatedCards, onActivate }: FlipCardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const isActivated = activatedCards.has(index);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const backRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (backRef.current && onMeasure) {
-      const height = backRef.current.scrollHeight;
-      onMeasure(index, height);
-    }
-  }, [data.description, index, onMeasure]);
 
   const clearTimer = useCallback(() => {
     if (timerRef.current) {
@@ -79,8 +69,7 @@ const FlipCard = ({ data, index, activatedCards, onActivate, minHeight, onMeasur
 
   return (
     <div
-      className="perspective-1000"
-      style={{ height: minHeight ? `${minHeight}px` : '18rem' }}
+      className="perspective-1000 h-80"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
@@ -115,7 +104,7 @@ const FlipCard = ({ data, index, activatedCards, onActivate, minHeight, onMeasur
         </div>
 
         {/* Back Side */}
-        <div ref={backRef} className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card text-card-foreground flex flex-col p-5 shadow-lg border border-border overflow-hidden">
+        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card text-card-foreground flex flex-col p-5 shadow-lg border border-border overflow-hidden">
           <p className="text-sm leading-relaxed flex-1 text-muted-foreground">
             {data.description}
           </p>
