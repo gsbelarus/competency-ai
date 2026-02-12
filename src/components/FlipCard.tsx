@@ -94,10 +94,10 @@ const FlipCard = ({ data, index, activatedCards, onActivate }: FlipCardProps) =>
           </div>
 
           <div className="flex-1 bg-secondary px-4 py-3 flex flex-col justify-center">
-            <h3 className="text-base font-semibold text-secondary-foreground leading-tight mb-1">
+            <h3 className="text-lg font-semibold text-secondary-foreground leading-tight mb-1">
               {data.title}
             </h3>
-            <span className="text-sm text-secondary-foreground/70">
+            <span className="text-base text-secondary-foreground/70">
               {data.category}
             </span>
           </div>
