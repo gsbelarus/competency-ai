@@ -25,20 +25,7 @@ const Hero = () => {
           {/* Title */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground mb-6 leading-tight">
             Управляйте{" "}
-            <span className="text-primary relative inline-block overflow-hidden">
-              компетенциями
-              <span
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: 'linear-gradient(90deg, transparent 0%, hsl(var(--primary-foreground) / 0.5) 50%, transparent 100%)',
-                  backgroundSize: '200% 100%',
-                  mixBlendMode: 'soft-light',
-                  animation: 'shine-sweep 2s ease-in-out forwards',
-                  animationDelay: '0.5s',
-                  opacity: 0,
-                }}
-              />
-            </span>
+            <span className="text-primary">компетенциями</span>
             <br />с помощью ИИ
           </h1>
           
