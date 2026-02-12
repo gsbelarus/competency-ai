@@ -25,7 +25,7 @@ const Hero = () => {
           {/* Title */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground mb-6 leading-tight">
             Управляйте{" "}
-            <span className="text-primary">компетенциями</span>
+            <span className="shimmer-text">компетенциями</span>
             <br />с помощью ИИ
           </h1>
           
