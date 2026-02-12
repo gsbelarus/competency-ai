@@ -144,27 +144,42 @@ const FlipCard = ({ zone, index, activatedCards, onActivate }: {
   const isActivated = activatedCards.has(index);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleMouseEnter = useCallback(() => {
-    if (!isActivated) onActivate(index);
+  const clearTimer = useCallback(() => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
     }
+  }, []);
+
+  const handleMouseEnter = useCallback(() => {
+    if (!isActivated) onActivate(index);
+    clearTimer();
     setIsFlipped(true);
-  }, [isActivated, index, onActivate]);
+  }, [isActivated, index, onActivate, clearTimer]);
 
   const handleMouseLeave = useCallback(() => {
-    timerRef.current = setTimeout(() => {
-      setIsFlipped(false);
-      timerRef.current = null;
-    }, 8000);
+    setIsFlipped(prev => {
+      if (prev) {
+        timerRef.current = setTimeout(() => {
+          setIsFlipped(false);
+          timerRef.current = null;
+        }, 8000);
+      }
+      return prev;
+    });
   }, []);
+
+  const handleClick = useCallback(() => {
+    clearTimer();
+    setIsFlipped(prev => !prev);
+  }, [clearTimer]);
 
   return (
     <div 
       className="perspective-1000 h-72"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
     >
       <div 
         className={`relative w-full h-full transition-transform duration-500 transform-style-3d ${isFlipped ? 'rotate-y-180' : ''}`}
