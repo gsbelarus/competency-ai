@@ -105,7 +105,7 @@ const FlipCard = ({ data, index, activatedCards, onActivate }: FlipCardProps) =>
 
         {/* Back Side */}
         <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card text-card-foreground flex flex-col p-5 shadow-lg border border-border overflow-hidden">
-          <p className="text-sm leading-relaxed text-muted-foreground overflow-hidden text-ellipsis" style={{ display: '-webkit-box', WebkitLineClamp: 7, WebkitBoxOrient: 'vertical' }}>
+          <p className="text-sm leading-relaxed text-muted-foreground flex-1 overflow-hidden">
             {data.description}
           </p>
           <div className="mt-auto pt-2">
