@@ -110,9 +110,9 @@ const FlipCard = ({ data, index, activatedCards, onActivate }: FlipCardProps) =>
             </span>
             {isMobile && (
               <Button
-                variant="ghost"
+                variant="default"
                 size="sm"
-                className="absolute bottom-2 right-2 text-xs text-primary h-7 px-2"
+                className="absolute bottom-2 right-2 text-xs h-7 px-3"
                 onClick={handleMobileFlip}
               >
                 Подробнее
@@ -122,7 +122,10 @@ const FlipCard = ({ data, index, activatedCards, onActivate }: FlipCardProps) =>
         </div>
 
         {/* Back Side */}
-        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card text-card-foreground flex flex-col p-5 shadow-lg border border-border overflow-hidden">
+        <div
+          className="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card text-card-foreground flex flex-col p-5 shadow-lg border border-border overflow-hidden"
+          onClick={isMobile && !isPanelOpen ? handleMobileFlip : undefined}
+        >
           <p className="text-sm leading-relaxed text-muted-foreground flex-1 overflow-hidden">
             {data.description}
           </p>
