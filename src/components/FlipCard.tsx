@@ -58,8 +58,9 @@ const FlipCard = ({ data, index, activatedCards, onActivate }: FlipCardProps) =>
     setIsFlipped(prev => !prev);
   }, [isMobile, clearTimer, isPanelOpen]);
 
-  const handleMobileFlip = useCallback((e: React.MouseEvent) => {
+  const handleMobileFlip = useCallback((e: React.MouseEvent | React.TouchEvent) => {
     e.stopPropagation();
+    e.preventDefault();
     if (!isActivated) onActivate(index);
     setIsFlipped(prev => !prev);
   }, [isActivated, index, onActivate]);
@@ -113,6 +114,7 @@ const FlipCard = ({ data, index, activatedCards, onActivate }: FlipCardProps) =>
                 variant="default"
                 size="sm"
                 className="absolute bottom-2 right-2 text-xs h-7 px-3"
+                onTouchEnd={handleMobileFlip}
                 onClick={handleMobileFlip}
               >
                 Подробнее
