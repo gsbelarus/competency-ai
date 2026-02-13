@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export interface FlipCardData {
   image: string;
@@ -21,6 +22,7 @@ const FlipCard = ({ data, index, activatedCards, onActivate }: FlipCardProps) =>
   const [isFlipped, setIsFlipped] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const isActivated = activatedCards.has(index);
+  const isMobile = useIsMobile();
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const clearTimer = useCallback(() => {
@@ -51,10 +53,16 @@ const FlipCard = ({ data, index, activatedCards, onActivate }: FlipCardProps) =>
   }, [isPanelOpen]);
 
   const handleClick = useCallback(() => {
-    if (isPanelOpen) return;
+    if (isMobile || isPanelOpen) return;
     clearTimer();
     setIsFlipped(prev => !prev);
-  }, [clearTimer, isPanelOpen]);
+  }, [isMobile, clearTimer, isPanelOpen]);
+
+  const handleMobileFlip = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!isActivated) onActivate(index);
+    setIsFlipped(prev => !prev);
+  }, [isActivated, index, onActivate]);
 
   const openPanel = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
@@ -93,13 +101,23 @@ const FlipCard = ({ data, index, activatedCards, onActivate }: FlipCardProps) =>
             <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
           </div>
 
-          <div className="flex-1 bg-secondary px-4 py-3 flex flex-col justify-center">
+          <div className="flex-1 bg-secondary px-4 py-3 flex flex-col justify-center relative">
             <h3 className="text-lg font-semibold text-secondary-foreground leading-tight mb-1">
               {data.title}
             </h3>
             <span className="text-base text-secondary-foreground/70">
               {data.category}
             </span>
+            {isMobile && (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="absolute bottom-2 right-2 text-xs text-primary h-7 px-2"
+                onClick={handleMobileFlip}
+              >
+                Подробнее
+              </Button>
+            )}
           </div>
         </div>
 
