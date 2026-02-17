@@ -1,4 +1,4 @@
-import logoImg from "@/assets/logo-competenceiq.png";
+import { Brain } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -8,8 +8,10 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-            <img src={logoImg} alt="CompetenceIQ" className="w-10 h-10 rounded-lg object-contain" />
-            <span className="text-xl font-bold text-primary-foreground">Competence<span className="text-accent-foreground">IQ</span></span>
+              <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+                <Brain className="w-6 h-6 text-primary-foreground" />
+              </div>
+              <span className="text-xl font-bold text-primary-foreground">Competence<span className="text-accent-foreground">IQ</span></span>
             </div>
             <p className="text-primary-foreground/70 max-w-sm leading-relaxed">
               Интеллектуальная система управления компетенциями персонала 
