@@ -11,7 +11,7 @@ const Footer = () => {
               <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
                 <Brain className="w-6 h-6 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold text-primary-foreground">CompetenceAI</span>
+              <span className="text-xl font-bold text-primary-foreground">Competence<span className="text-accent-foreground">IQ</span></span>
             </div>
             <p className="text-primary-foreground/70 max-w-sm leading-relaxed">
               Интеллектуальная система управления компетенциями персонала 
@@ -44,7 +44,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-primary-foreground/60">
-            © 2025 CompetenceAI. Все права защищены.
+            © 2025 CompetenceIQ. Все права защищены.
           </p>
           <div className="flex items-center gap-6">
             <a href="#" className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors">
