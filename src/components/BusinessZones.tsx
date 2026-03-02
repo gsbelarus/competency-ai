@@ -1,5 +1,6 @@
 import { useState } from "react";
-import FlipCard from "@/components/FlipCard";
+import { Button } from "@/components/ui/button";
+import { ChevronDown, ArrowRight, Users, Cog, ShoppingCart, ShieldCheck } from "lucide-react";
 
 import recruitmentImg from "@/assets/zones/recruitment.jpg";
 import trainingImg from "@/assets/zones/training.jpg";
@@ -18,151 +19,140 @@ import expertsImg from "@/assets/zones/experts.jpg";
 import callCenterImg from "@/assets/zones/call-center.jpg";
 import regionalImg from "@/assets/zones/regional.jpg";
 
-const businessZones = [
+interface Zone {
+  image: string;
+  title: string;
+  category: string;
+  goal: string;
+}
+
+interface Cluster {
+  icon: typeof Users;
+  title: string;
+  color: "primary" | "accent" | "chart-3" | "chart-4";
+  zones: Zone[];
+}
+
+const clusters: Cluster[] = [
   {
-    image: recruitmentImg,
-    title: "Подбор и адаптация",
-    category: "HR / Recruitment",
-    description: "Тестирование кандидатов на этапе найма для объективной оценки знаний и соответствия требованиям. Входное тестирование новых сотрудников, отслеживание адаптации и итоговая аттестация после испытательного срока снижают риск ошибочного найма.",
-    goal: "Снижение риска ошибочного найма"
+    icon: Users,
+    title: "Люди и развитие",
+    color: "primary",
+    zones: [
+      { image: recruitmentImg, title: "Подбор и адаптация", category: "HR / Recruitment", goal: "Снижение риска ошибочного найма" },
+      { image: trainingImg, title: "Обучение и развитие", category: "L&D / Training", goal: "Измеримая эффективность обучения" },
+      { image: managementImg, title: "Менеджмент", category: "Management", goal: "Выравнивание управленческого уровня" },
+      { image: expertsImg, title: "Ключевые эксперты", category: "Critical Roles", goal: "Снижение bus-factor" },
+      { image: cultureImg, title: "Корпоративная культура", category: "Culture & Ethics", goal: "Снижение репутационных рисков" },
+    ],
   },
   {
-    image: trainingImg,
-    title: "Обучение и развитие",
-    category: "L&D / Training",
-    description: "Контроль усвоения материалов через тестирование после каждого модуля обучения. Измерение эффективности программ развития и расчёт ROI инвестиций в обучение. Выявление пробелов позволяет своевременно корректировать программы развития сотрудников.",
-    goal: "Измеримая эффективность обучения"
+    icon: Cog,
+    title: "Операции и безопасность",
+    color: "accent",
+    zones: [
+      { image: productionImg, title: "Производство", category: "Operations", goal: "Снижение брака и аварий" },
+      { image: safetyImg, title: "Охрана труда", category: "HSE / BHP", goal: "Снижение травматизма" },
+      { image: qualityImg, title: "Качество и стандарты", category: "QA / ISO / GMP", goal: "Успешное прохождение аудитов" },
+      { image: contractorsImg, title: "Подрядчики и партнёры", category: "Outsourcing", goal: "Контроль рисков вне штата" },
+      { image: regionalImg, title: "Региональные представители", category: "Regional Offices", goal: "Единые стандарты в регионах" },
+    ],
   },
   {
-    image: productionImg,
-    title: "Производство",
-    category: "Operations",
-    description: "Проверка знаний технологических карт, операционных процедур и правил работы с оборудованием. Контроль допусков к критическим операциям и документальное подтверждение квалификации персонала снижают производственный брак и предотвращают аварийные ситуации.",
-    goal: "Снижение брака и аварий"
+    icon: ShoppingCart,
+    title: "Коммерция и клиент",
+    color: "chart-3",
+    zones: [
+      { image: salesImg, title: "Продажи и сервис", category: "Sales / CS", goal: "Повышение конверсии" },
+      { image: callCenterImg, title: "Контактный центр", category: "Call Center", goal: "Повышение качества обслуживания" },
+    ],
   },
   {
-    image: safetyImg,
-    title: "Охрана труда",
-    category: "HSE / BHP",
-    description: "Автоматизация инструктажей по технике безопасности с обязательным тестированием. Фиксация результатов проверок и формирование документального подтверждения прохождения инструктажей обеспечивают соответствие законодательству и снижают риск производственного травматизма.",
-    goal: "Снижение травматизма"
+    icon: ShieldCheck,
+    title: "Управление и контроль",
+    color: "chart-4",
+    zones: [
+      { image: itSecurityImg, title: "ИТ и информационная безопасность", category: "IT / InfoSec", goal: "Снижение человеческого фактора" },
+      { image: financeImg, title: "Финансы и комплаенс", category: "Finance / Compliance", goal: "Снижение регуляторных рисков" },
+      { image: legalImg, title: "Юридическая функция", category: "Legal", goal: "Снижение правовых последствий" },
+      { image: erpSystemsImg, title: "Корпоративные ИТ-системы", category: "ERP / CRM", goal: "Снижение потерь от ошибок" },
+    ],
   },
-  {
-    image: itSecurityImg,
-    title: "ИТ и информационная безопасность",
-    category: "IT / InfoSec",
-    description: "Тестирование на знание политик информационной безопасности, правил работы с конфиденциальными данными и защиты от фишинга. Контроль осведомлённости о процедурах работы с доступами снижает риски человеческого фактора в сфере ИБ.",
-    goal: "Снижение человеческого фактора"
-  },
-  {
-    image: financeImg,
-    title: "Финансы и комплаенс",
-    category: "Finance / Compliance",
-    description: "Проверка знаний финансовых процедур, регуляторных требований и внутренних политик. Контроль осведомлённости о требованиях AML, антикоррупционном законодательстве и правилах финансовой отчётности минимизирует регуляторные риски и штрафные санкции.",
-    goal: "Снижение регуляторных рисков"
-  },
-  {
-    image: salesImg,
-    title: "Продажи и сервис",
-    category: "Sales / CS",
-    description: "Контроль знаний продуктовой линейки, скриптов продаж и условий коммерческих договоров. Поддержание экспертизы менеджеров и соблюдение стандартов клиентского обслуживания повышают конверсию и качество работы с клиентами.",
-    goal: "Повышение конверсии"
-  },
-  {
-    image: managementImg,
-    title: "Менеджмент",
-    category: "Management",
-    description: "Оценка знаний руководителей в области внутренних политик, управления конфликтами и применения KPI. Выравнивание управленческого уровня и развитие лидерских компетенций обеспечивают единое понимание корпоративных стандартов на всех уровнях.",
-    goal: "Выравнивание управленческого уровня"
-  },
-  {
-    image: legalImg,
-    title: "Юридическая функция",
-    category: "Legal",
-    description: "Проверка знаний типовых договоров, процедур согласования и зон правовой ответственности. Помощь сотрудникам в понимании юридических аспектов работы снижает правовые риски и ускоряет процессы согласования документов.",
-    goal: "Снижение правовых последствий"
-  },
-  {
-    image: qualityImg,
-    title: "Качество и стандарты",
-    category: "QA / ISO / GMP",
-    description: "Контроль знаний стандартов качества, процедур аудита и требований сертификаций ISO, GMP и других. Обеспечение готовности персонала к проверкам поддерживает культуру качества и гарантирует успешное прохождение внешних аудитов.",
-    goal: "Успешное прохождение аудитов"
-  },
-  {
-    image: erpSystemsImg,
-    title: "Корпоративные ИТ-системы",
-    category: "ERP / CRM",
-    description: "Проверка навыков работы с корпоративными системами ERP, CRM, WMS и другими. Контроль правильности использования ИТ-инструментов снижает количество ошибок при вводе данных и повышает эффективность бизнес-процессов организации.",
-    goal: "Снижение потерь от ошибок"
-  },
-  {
-    image: cultureImg,
-    title: "Корпоративная культура",
-    category: "Culture & Ethics",
-    description: "Проверка знаний кодекса корпоративного поведения, этических стандартов и политик разнообразия. Контроль осведомлённости о каналах whistleblowing укрепляет корпоративную культуру и снижает репутационные риски компании.",
-    goal: "Снижение репутационных рисков"
-  },
-  {
-    image: contractorsImg,
-    title: "Подрядчики и партнёры",
-    category: "Outsourcing",
-    description: "Контроль знаний внешних исполнителей о стандартах и требованиях компании. Проверка подрядчиков перед допуском к работам и корпоративным системам минимизирует риски привлечения внешнего персонала и поддерживает единые стандарты качества.",
-    goal: "Контроль рисков вне штата"
-  },
-  {
-    image: expertsImg,
-    title: "Ключевые эксперты",
-    category: "Critical Roles",
-    description: "Документирование и проверка уникальных знаний ключевых специалистов компании. Актуализация экспертизы и выявление областей для передачи знаний в рамках succession planning снижают зависимость организации от отдельных сотрудников.",
-    goal: "Снижение bus-factor"
-  },
-  {
-    image: callCenterImg,
-    title: "Контактный центр",
-    category: "Call Center",
-    description: "Оценка качества работы операторов: знание скриптов поддержки и продаж, владение продуктовой линейкой, грамотность речи и соблюдение стандартов вежливости. Регулярное тестирование поддерживает единый уровень обслуживания клиентов.",
-    goal: "Повышение качества обслуживания"
-  },
-  {
-    image: regionalImg,
-    title: "Региональные представители",
-    category: "Regional Offices",
-    description: "Контроль знаний региональных представителей с учётом специфики локальных рынков и законодательства. Проверка осведомлённости о нормативных актах, конкурентной среде и стратегических целях компании обеспечивает единые стандарты на удалённых площадках.",
-    goal: "Единые стандарты в регионах"
-  }
 ];
 
-const BusinessZones = () => {
-  const [activatedCards, setActivatedCards] = useState<Set<number>>(new Set());
+const colorMap: Record<string, string> = {
+  primary: "text-primary bg-primary/10 border-primary/20",
+  accent: "text-accent bg-accent/10 border-accent/20",
+  "chart-3": "text-[hsl(173,80%,40%)] bg-[hsl(173,80%,40%)]/10 border-[hsl(173,80%,40%)]/20",
+  "chart-4": "text-[hsl(43,96%,56%)] bg-[hsl(43,96%,56%)]/10 border-[hsl(43,96%,56%)]/20",
+};
 
-  const handleActivate = (index: number) => {
-    setActivatedCards(prev => new Set(prev).add(index));
-  };
+const BusinessZones = () => {
+  const [openCluster, setOpenCluster] = useState<number | null>(null);
 
   return (
-    <section className="py-24 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <section id="zones" className="py-24 relative overflow-hidden">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Зоны применения на предприятии
+          <span className="text-sm font-medium text-primary uppercase tracking-wider mb-4 block">16 бизнес-зон</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
+            Охват всего{" "}
+            <span className="gradient-text">предприятия</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Система контроля знаний эффективно интегрируется в 16 ключевых бизнес-процессов, 
-            обеспечивая комплексное управление компетенциями
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            4 кластера покрывают все ключевые бизнес-процессы — от найма до комплаенса
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {businessZones.map((zone, index) => (
-            <FlipCard 
-              key={index} 
-              data={zone} 
-              index={index}
-              activatedCards={activatedCards}
-              onActivate={handleActivate}
-            />
-          ))}
+
+        <div className="max-w-5xl mx-auto space-y-4">
+          {clusters.map((cluster, ci) => {
+            const isOpen = openCluster === ci;
+            const colors = colorMap[cluster.color];
+            
+            return (
+              <div key={ci} className="rounded-xl border border-border/50 bg-card/50 overflow-hidden transition-all duration-300 hover:border-border">
+                {/* Cluster Header */}
+                <button
+                  onClick={() => setOpenCluster(isOpen ? null : ci)}
+                  className="w-full flex items-center justify-between p-6 text-left"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${colors}`}>
+                      <cluster.icon className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-foreground">{cluster.title}</h3>
+                      <span className="text-sm text-muted-foreground">{cluster.zones.length} зон</span>
+                    </div>
+                  </div>
+                  <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {/* Expanded Zones */}
+                <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <div className="px-6 pb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {cluster.zones.map((zone, zi) => (
+                      <div
+                        key={zi}
+                        className="group flex items-start gap-3 p-4 rounded-lg border border-border/30 bg-background/50 hover:border-border hover:bg-background transition-all duration-200"
+                      >
+                        <img
+                          src={zone.image}
+                          alt={zone.title}
+                          className="w-12 h-12 rounded-lg object-cover shrink-0"
+                        />
+                        <div className="min-w-0">
+                          <h4 className="text-sm font-semibold text-foreground leading-tight mb-0.5">{zone.title}</h4>
+                          <p className="text-xs text-muted-foreground mb-1">{zone.category}</p>
+                          <p className="text-xs text-primary">{zone.goal}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
