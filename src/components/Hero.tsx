@@ -3,7 +3,7 @@ import { ArrowRight, Shield, Clock, Layers } from "lucide-react";
 
 const markers = [
   { icon: Layers, text: "16 бизнес-зон" },
-  { icon: Shield, text: "Протоколирование для аудитов" },
+  { icon: Shield, text: "Протоколирование" },
   { icon: Clock, text: "Отчёт за 5–15 минут" },
 ];
 
