@@ -1,8 +1,12 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Features from "@/components/Features";
+import ProblemSection from "@/components/ProblemSection";
+import SolutionSection from "@/components/SolutionSection";
+import AssessmentFormats from "@/components/AssessmentFormats";
+import StepFlow from "@/components/StepFlow";
 import BusinessZones from "@/components/BusinessZones";
-import AntiCheat from "@/components/AntiCheat";
+import PainFilters from "@/components/PainFilters";
+import FAQSection from "@/components/FAQSection";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
@@ -11,9 +15,13 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <Hero />
+      <ProblemSection />
+      <SolutionSection />
+      <AssessmentFormats />
+      <StepFlow />
       <BusinessZones />
-      <Features />
-      <AntiCheat />
+      <PainFilters />
+      <FAQSection />
       <CTA />
       <Footer />
     </div>
