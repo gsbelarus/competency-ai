@@ -16,7 +16,7 @@ const ProblemSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <span className="text-sm font-medium text-amber-400 uppercase tracking-wider mb-4 block">Проблема</span>
+          <span className="text-sm font-medium text-accent uppercase tracking-wider mb-4 block">Проблема</span>
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
             Невидимые пробелы в компетенциях
             <br />
