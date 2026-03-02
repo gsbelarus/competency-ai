@@ -27,7 +27,7 @@ const Header = () => {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
             <Button variant="ghost" size="sm" className="text-muted-foreground">Войти</Button>
-            <Button variant="default" size="sm">Запросить демо</Button>
+            <Button variant="default" size="sm">Узнать цены</Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -45,7 +45,7 @@ const Header = () => {
               <a href="#contact" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2">Контакты</a>
               <div className="flex flex-col gap-2 pt-3 border-t border-border/30">
                 <Button variant="ghost" size="sm" className="justify-start">Войти</Button>
-                <Button variant="default" size="sm">Запросить демо</Button>
+                <Button variant="default" size="sm">Узнать цены</Button>
               </div>
             </div>
           </nav>
