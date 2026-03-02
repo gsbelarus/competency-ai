@@ -22,7 +22,7 @@ const ProblemSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
-          <span className="text-sm font-medium text-destructive/80 uppercase tracking-wider mb-4 block">Проблема</span>
+          <span className="text-sm font-medium text-destructive uppercase tracking-wider mb-4 block">Проблема</span>
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
             Невидимые пробелы в компетенциях
             <br />
@@ -51,20 +51,20 @@ const ProblemSection = () => {
                 style={{ left: p.x, top: p.y, transform: 'translate(-50%, -50%)' }}
               >
                 {/* Orbit ring */}
-                <div className={`${s.ring} rounded-full border border-destructive/15 group-hover:border-destructive/40 transition-all duration-500 flex items-center justify-center relative`}>
+                <div className={`${s.ring} rounded-full border border-destructive/40 group-hover:border-destructive/70 transition-all duration-500 flex items-center justify-center relative`}>
                   {/* Pulsing glow */}
-                  <div className="absolute inset-0 rounded-full bg-destructive/5 group-hover:bg-destructive/10 transition-colors duration-500" />
+                  <div className="absolute inset-0 rounded-full bg-destructive/10 group-hover:bg-destructive/20 transition-colors duration-500" />
                   
                   {/* Orbiting dot */}
-                  <div className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 ${s.dot} rounded-full bg-destructive/60`} />
+                  <div className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 ${s.dot} rounded-full bg-destructive`} />
                   
                   {/* Center icon */}
-                  <p.icon className={`${s.icon} text-destructive/60 group-hover:text-destructive group-hover:scale-110 transition-all duration-300 relative z-10`} />
+                  <p.icon className={`${s.icon} text-destructive group-hover:text-destructive group-hover:scale-110 transition-all duration-300 relative z-10`} />
                 </div>
 
                 {/* Label */}
                 <div className="absolute left-1/2 -translate-x-1/2 mt-2 text-center whitespace-nowrap">
-                  <div className="text-sm font-semibold text-foreground group-hover:text-destructive/90 transition-colors">{p.title}</div>
+                  <div className="text-sm font-semibold text-foreground group-hover:text-destructive transition-colors">{p.title}</div>
                   <div className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">{p.desc}</div>
                 </div>
               </div>
@@ -76,8 +76,8 @@ const ProblemSection = () => {
         <div className="lg:hidden space-y-6 max-w-md mx-auto">
           {problems.map((p, i) => (
             <div key={i} className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-full border border-destructive/20 bg-destructive/5 flex items-center justify-center shrink-0">
-                <p.icon className="w-6 h-6 text-destructive/70" />
+              <div className="w-14 h-14 rounded-full border border-destructive/40 bg-destructive/10 flex items-center justify-center shrink-0">
+                <p.icon className="w-6 h-6 text-destructive" />
               </div>
               <div>
                 <div className="text-sm font-semibold text-foreground">{p.title}</div>
