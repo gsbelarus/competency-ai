@@ -2,7 +2,7 @@ import { Layers, ClipboardCheck, Cpu, FileBarChart } from "lucide-react";
 
 const steps = [
   { icon: Layers, title: "Выберите зону или роль", desc: "Укажите бизнес-зону или конкретную должность для оценки" },
-  { icon: ClipboardCheck, title: "Self-assessment или интервью", desc: "Выберите формат: быстрый тест или глубокое AI-интервью" },
+  { icon: ClipboardCheck, title: "Тест или интервью", desc: "Выберите формат: быстрый тест или глубокое AI-интервью" },
   { icon: Cpu, title: "AI-анализ ответов", desc: "Искусственный интеллект обрабатывает и оценивает результаты" },
   { icon: FileBarChart, title: "Отчёт + карта компетенций", desc: "Получите детальный отчёт с картой пробелов и рекомендациями" },
 ];

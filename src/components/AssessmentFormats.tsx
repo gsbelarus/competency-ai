@@ -29,7 +29,7 @@ const AssessmentFormats = () => {
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              Self-assessment
+              Тест
             </button>
             <button
               onClick={() => setActiveTab("interview")}
@@ -87,7 +87,7 @@ const AssessmentFormats = () => {
 
                 {/* Right: text + CTA */}
                 <div className="flex-1 text-center lg:text-left">
-                  <h3 className="text-3xl font-bold text-foreground mb-3">Self-assessment</h3>
+                  <h3 className="text-3xl font-bold text-foreground mb-3">Тест</h3>
                   <p className="text-muted-foreground mb-6 leading-relaxed">
                     Быстрая самооценка компетенций. За 5–7 минут система выявит ключевые пробелы, 
                     сформирует персональный отчёт и предложит рекомендации по развитию.
@@ -101,7 +101,7 @@ const AssessmentFormats = () => {
                     ))}
                   </div>
                   <Button variant="hero" size="xl" className="glow-primary group">
-                    Пройти self-assessment
+                    Пройти тест
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </div>
