@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Users, Cog, ShoppingCart, ShieldCheck } from "lucide-react";
 
@@ -81,8 +80,14 @@ const colorStyles: Record<string, { accent: string; bg: string; border: string }
   "chart-4": { accent: "text-[hsl(43,96%,56%)]", bg: "bg-[hsl(43,96%,56%)]/10", border: "border-[hsl(43,96%,56%)]/20" },
 };
 
-const BusinessZones = () => {
-  const [openCluster, setOpenCluster] = useState<number | null>(null);
+interface BusinessZonesProps {
+  activeCluster?: number | null;
+  setActiveCluster?: (idx: number | null) => void;
+}
+
+const BusinessZones = ({ activeCluster, setActiveCluster }: BusinessZonesProps) => {
+  const openCluster = activeCluster ?? null;
+  const setOpenCluster = (idx: number | null) => setActiveCluster?.(idx);
 
   return (
     <section id="zones" className="py-24 relative overflow-hidden">

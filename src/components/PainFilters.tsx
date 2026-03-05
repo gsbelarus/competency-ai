@@ -10,7 +10,11 @@ const pains = [
   { label: "ERP-ошибки", zones: ["Корпоративные ИТ-системы"] },
 ];
 
-const PainFilters = () => {
+interface PainFiltersProps {
+  onZoneSelect?: (zoneName: string) => void;
+}
+
+const PainFilters = ({ onZoneSelect }: PainFiltersProps) => {
   const [active, setActive] = useState<number | null>(null);
 
   return (
@@ -40,12 +44,13 @@ const PainFilters = () => {
         {active !== null && (
           <div className="flex flex-wrap justify-center gap-2 animate-fade-in">
             {pains[active].zones.map((zone, zi) => (
-              <span
+              <button
                 key={zi}
-                className="px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm font-medium border border-primary/20"
+                onClick={() => onZoneSelect?.(zone)}
+                className="px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm font-medium border border-primary/20 hover:bg-primary/20 transition-colors cursor-pointer"
               >
                 {zone}
-              </span>
+              </button>
             ))}
           </div>
         )}
