@@ -23,6 +23,7 @@ interface Zone {
   image: string;
   title: string;
   category: string;
+  description: string;
   goal: string;
 }
 
