@@ -156,7 +156,11 @@ const BusinessZones = () => {
 
                           <div className="p-4 -mt-6 relative z-10">
                             <h4 className="text-sm font-semibold text-foreground mb-1">{zone.title}</h4>
-                            <p className={`text-xs ${cs.accent}`}>{zone.goal}</p>
+                            <p className={`text-xs ${cs.accent} mb-3`}>{zone.goal}</p>
+                            <div className="flex gap-2">
+                              <Button variant="default" size="sm" className="text-xs h-7 px-3">Пройти тест</Button>
+                              <Button variant="outline" size="sm" className="text-xs h-7 px-3">Интервью</Button>
+                            </div>
                           </div>
                         </div>
                       ))}
