@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Button } from "@/components/ui/button";
 import { ChevronDown, Users, Cog, ShoppingCart, ShieldCheck } from "lucide-react";
 
 import recruitmentImg from "@/assets/zones/recruitment.jpg";
