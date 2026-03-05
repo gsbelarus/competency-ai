@@ -143,21 +143,22 @@ const BusinessZones = () => {
                       {cluster.zones.map((zone, zi) => (
                         <div
                           key={zi}
-                          className="group/zone relative overflow-hidden rounded-xl bg-background/50 hover:bg-background transition-all duration-300"
+                          className="group/zone relative overflow-hidden rounded-xl bg-background/50 hover:bg-background transition-all duration-300 flex flex-col"
                         >
                           {/* Zone image strip */}
-                          <div className="h-24 overflow-hidden">
+                          <div className="h-24 overflow-hidden relative">
                             <img
                               src={zone.image}
                               alt={zone.title}
                               className="w-full h-full object-cover group-hover/zone:scale-105 transition-transform duration-500"
                             />
-                            <div className="absolute inset-0 h-24 bg-gradient-to-t from-background/90 to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />
                           </div>
 
-                          <div className="p-4 -mt-6 relative z-10">
-                            <h4 className="text-sm font-semibold text-foreground mb-1">{zone.title}</h4>
-                            <p className={`text-xs ${cs.accent} mb-3`}>{zone.goal}</p>
+                          <div className="p-4 -mt-6 relative z-10 flex flex-col flex-1">
+                            <h4 className="text-sm font-semibold text-foreground mb-0.5">{zone.title}</h4>
+                            <p className={`text-xs ${cs.accent} mb-2`}>{zone.goal}</p>
+                            <p className="text-xs text-muted-foreground leading-relaxed mb-3 flex-1">{zone.description}</p>
                             <div className="flex gap-2">
                               <Button variant="default" size="sm" className="text-xs h-7 px-3">Пройти тест</Button>
                               <Button variant="outline" size="sm" className="text-xs h-7 px-3">Интервью</Button>
