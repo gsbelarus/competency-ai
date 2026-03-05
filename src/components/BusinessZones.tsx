@@ -33,11 +33,11 @@ const clusters = [
     title: "Люди и развитие",
     color: "primary" as const,
     zones: [
-      { image: recruitmentImg, title: "Подбор и адаптация", category: "HR", goal: "Снижение риска ошибочного найма" },
-      { image: trainingImg, title: "Обучение и развитие", category: "L&D", goal: "Измеримая эффективность обучения" },
-      { image: managementImg, title: "Менеджмент", category: "Management", goal: "Выравнивание управленческого уровня" },
-      { image: expertsImg, title: "Ключевые эксперты", category: "Critical", goal: "Снижение bus-factor" },
-      { image: cultureImg, title: "Корпоративная культура", category: "Culture", goal: "Снижение репутационных рисков" },
+      { image: recruitmentImg, title: "Подбор и адаптация", category: "HR", description: "Оценка hard- и soft-skills кандидатов до оффера. Выявление несоответствий профилю должности и снижение текучести на испытательном сроке.", goal: "Снижение риска ошибочного найма" },
+      { image: trainingImg, title: "Обучение и развитие", category: "L&D", description: "Проверка усвоения материала после тренингов и курсов. Объективное измерение прогресса и выявление пробелов в знаниях.", goal: "Измеримая эффективность обучения" },
+      { image: managementImg, title: "Менеджмент", category: "Management", description: "Диагностика управленческих компетенций руководителей всех уровней. Выявление зон роста и формирование индивидуальных планов развития.", goal: "Выравнивание управленческого уровня" },
+      { image: expertsImg, title: "Ключевые эксперты", category: "Critical", description: "Документирование и верификация экспертных знаний критически важных сотрудников. Подготовка преемников и снижение зависимости от отдельных людей.", goal: "Снижение bus-factor" },
+      { image: cultureImg, title: "Корпоративная культура", category: "Culture", description: "Проверка знания ценностей, политик и стандартов поведения компании. Раннее выявление рисков нарушения этических норм.", goal: "Снижение репутационных рисков" },
     ],
   },
   {
@@ -45,11 +45,11 @@ const clusters = [
     title: "Операции и безопасность",
     color: "accent" as const,
     zones: [
-      { image: productionImg, title: "Производство", category: "Operations", goal: "Снижение брака и аварий" },
-      { image: safetyImg, title: "Охрана труда", category: "HSE", goal: "Снижение травматизма" },
-      { image: qualityImg, title: "Качество и стандарты", category: "QA/ISO", goal: "Успешное прохождение аудитов" },
-      { image: contractorsImg, title: "Подрядчики", category: "Outsource", goal: "Контроль рисков вне штата" },
-      { image: regionalImg, title: "Региональные офисы", category: "Regional", goal: "Единые стандарты" },
+      { image: productionImg, title: "Производство", category: "Operations", description: "Контроль знания технологических процессов и регламентов. Предотвращение ошибок, ведущих к браку и простоям оборудования.", goal: "Снижение брака и аварий" },
+      { image: safetyImg, title: "Охрана труда", category: "HSE", description: "Регулярная проверка знаний правил безопасности и действий в аварийных ситуациях. Соответствие требованиям надзорных органов.", goal: "Снижение травматизма" },
+      { image: qualityImg, title: "Качество и стандарты", category: "QA/ISO", description: "Верификация знания стандартов ISO, ГОСТ и внутренних СОП. Подготовка персонала к внешним и внутренним аудитам.", goal: "Успешное прохождение аудитов" },
+      { image: contractorsImg, title: "Подрядчики", category: "Outsource", description: "Проверка квалификации и знания стандартов компании у внешних подрядчиков перед допуском к работам.", goal: "Контроль рисков вне штата" },
+      { image: regionalImg, title: "Региональные офисы", category: "Regional", description: "Единые стандарты оценки для распределённых команд. Контроль уровня компетенций вне зависимости от географии.", goal: "Единые стандарты" },
     ],
   },
   {
@@ -57,8 +57,8 @@ const clusters = [
     title: "Коммерция и клиент",
     color: "chart-3" as const,
     zones: [
-      { image: salesImg, title: "Продажи и сервис", category: "Sales", goal: "Повышение конверсии" },
-      { image: callCenterImg, title: "Контактный центр", category: "Call Center", goal: "Качество обслуживания" },
+      { image: salesImg, title: "Продажи и сервис", category: "Sales", description: "Оценка знания продуктовой линейки, техник продаж и стандартов обслуживания. Выявление точек роста для увеличения конверсии.", goal: "Повышение конверсии" },
+      { image: callCenterImg, title: "Контактный центр", category: "Call Center", description: "Проверка скриптов, знания продуктов и навыков работы с возражениями. Контроль качества коммуникации с клиентами.", goal: "Качество обслуживания" },
     ],
   },
   {
@@ -66,10 +66,10 @@ const clusters = [
     title: "Управление и контроль",
     color: "chart-4" as const,
     zones: [
-      { image: itSecurityImg, title: "ИТ-безопасность", category: "InfoSec", goal: "Снижение человеческого фактора" },
-      { image: financeImg, title: "Финансы и комплаенс", category: "Compliance", goal: "Снижение регуляторных рисков" },
-      { image: legalImg, title: "Юридическая функция", category: "Legal", goal: "Снижение правовых рисков" },
-      { image: erpSystemsImg, title: "ИТ-системы", category: "ERP/CRM", goal: "Снижение потерь от ошибок" },
+      { image: itSecurityImg, title: "ИТ-безопасность", category: "InfoSec", description: "Проверка знания политик информационной безопасности, правил работы с данными и реагирования на инциденты.", goal: "Снижение человеческого фактора" },
+      { image: financeImg, title: "Финансы и комплаенс", category: "Compliance", description: "Контроль знания регуляторных требований, правил AML/KYC и внутренних финансовых процедур.", goal: "Снижение регуляторных рисков" },
+      { image: legalImg, title: "Юридическая функция", category: "Legal", description: "Верификация знания законодательства, договорных процессов и политик комплаенса юридической командой.", goal: "Снижение правовых рисков" },
+      { image: erpSystemsImg, title: "ИТ-системы", category: "ERP/CRM", description: "Проверка навыков работы в корпоративных системах: ERP, CRM, BI. Снижение ошибок ввода данных и ускорение адаптации.", goal: "Снижение потерь от ошибок" },
     ],
   },
 ];
